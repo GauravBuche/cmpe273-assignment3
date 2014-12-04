@@ -66,14 +66,14 @@
     val webLogin_seq = new WebLoginIdSequence()
     val baid_seq = new BankAccountIdSequence()
 
-    val client = new EtcdClient(URI.create("http://127.0.0.1:4001/"))
+    //val client = new EtcdClient(URI.create("http://127.0.0.1:4001/"))
+    val client = new EtcdClient(URI.create("http://54.183.225.139:4001/"))
     val initcounter = 0
-    val key = "/assignment3_key";
-
+    val key = "/009990994/counter"
     @ResponseStatus(HttpStatus.OK)
       @RequestMapping(value = Array("/counter"), method = Array(RequestMethod.GET))
-          @ResponseBody def getCounter(): Int = {
-
+          @ResponseBody def getCounter(): String = {
+/*
       var counter = 0
       try{
         counter = client.get(key).node.value.toInt
@@ -82,8 +82,19 @@
         case e: NullPointerException => client.set(key, ""+(initcounter+1))
           counter = client.get(key).node.value.toInt
       }
-
       client.set(key, ""+(counter+1))
+*/
+
+      var counter = ""
+      try{
+        counter = client.get(key).node.value
+
+      }catch {
+        case e: NullPointerException => client.set(key, ""+(initcounter+1))
+          counter = client.get(key).node.value
+      }
+      client.set(key, ""+(counter.toInt+1))
+
 /*
       counter = client.get(key).node.value
       if(counter==null){
