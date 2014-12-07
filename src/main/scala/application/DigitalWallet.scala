@@ -67,7 +67,7 @@
     val baid_seq = new BankAccountIdSequence()
 
     //val client = new EtcdClient(URI.create("http://127.0.0.1:4001/"))
-    val client = new EtcdClient(URI.create("http://54.183.225.139:4001/"))
+    val client = new EtcdClient(URI.create("http://54.67.103.220:4001"))
     val initcounter = 0
     val key = "/009990994/counter"
     @ResponseStatus(HttpStatus.OK)
